@@ -8,7 +8,7 @@ graph();
 
 
  async function graph(){
- const TempsData = await getData();
+ await getData();
  const canvas = document.getElementById("myCanvas");
  
  
