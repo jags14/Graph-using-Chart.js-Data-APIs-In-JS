@@ -1,12 +1,14 @@
  
  const xLables = [];
  const yLables = [];
+ const avgTempNorthern = [];
+ const avgTempSouthern = [];
 
 graph();
 
 
  async function graph(){
-    await  getData();
+ await getData();
  const canvas = document.getElementById("myCanvas");
  
  
@@ -22,6 +24,20 @@ graph();
         datasets: [{
             label: 'Average Temperature each year',
             data: yLables,
+            backgroundColor: 'rgba(153, 102, 255, 1)',
+                
+            borderWidth: 2
+        },
+                  {
+            label: 'Average Temperature each year of Southern Hemisphere',
+            data: avgTempSouthern,
+            backgroundColor: 'rgba(153, 102, 255, 1)',
+                
+            borderWidth: 2
+        },
+                  {
+            label: 'Average Temperature each year of Northern Hemisphere',
+            data: avgTempNorthern,
             backgroundColor: 'rgba(153, 102, 255, 1)',
                 
             borderWidth: 2
@@ -50,7 +66,16 @@ graph();
                 xLables.push(year);
                 const avgTemp = cols[2];
                 yLables.push(parseFloat(avgTemp) + 14);
-                console.log(year, avgTemp);
+             
+                const avgTempNorth = cols[4];
+                avgTempNorthern.push(parseFloat(avgTempNorth) + 14);
+             
+                const avgTempSouth = cols[6];
+                avgTempSouthern.push(parseFloat(avgTempSouth) + 14);
+             
+                //console.log(year, avgTemp);
+                // return year, avgTemp of Global, South and North H.Sphere
+                return {year, avgTemp, avgTempNorth, avgTempSouth}
             })
         }
 
